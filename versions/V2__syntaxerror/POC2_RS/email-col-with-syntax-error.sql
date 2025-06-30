@@ -1,0 +1,1 @@
+ALTER  TABLE [dbo].[Person] ADD [email] NVARCHAR (50) NUL;

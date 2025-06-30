@@ -1,0 +1,19 @@
+{
+  "operation": "CreateOrUpdate",
+  "type": "regular",
+  "enabled": true,
+  "closed": false,
+  "scripts": [
+    {
+      "name": "up-col.sql",
+      "tags": [],
+      "scriptType": "Upgrade"
+    },
+    {
+      "name": "down-error.sql",
+      "tags": [],
+      "scriptType": "Downgrade"
+    }
+  ],
+  "tags": []
+}

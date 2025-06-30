@@ -1,0 +1,24 @@
+trigger: none
+
+variables:
+  USERNAME: 'poc@dbmaestro.com'
+  PASSWORD: 'VmzU9NIDff1BALGXgsh58XXIg89FH7U5'
+  SERVER: 't21-template'
+  AGENT_PATH: '"C:\\Program Files (x86)\\DBmaestro\\DOP Server\\Agent\\DBmaestroAgent.jar"'
+  PROJECT_NAME: 'MSSQLPOC2'
+
+stages:
+- stage: RollbackRS
+  jobs:
+  - job: RollbackRS
+    pool:
+      name: Local
+      demands:
+      - agent.name -equals localhostagent  
+    steps:
+    - script: |
+        java -jar $(AGENT_PATH) -Rollback -PackageName $(PACKAGE_NAME) -ProjectName $(PROJECT_NAME) -EnvName QA -Server $(SERVER) -AuthType DBmaestroAccount -Username $(USERNAME) -Password $(PASSWORD)
+      displayName: 'Rollback RS'
+    - script: |
+        java -jar $(AGENT_PATH) -Rollback -PackageName $(PACKAGE_NAME) -ProjectName $(PROJECT_NAME) -EnvName RS -Server $(SERVER) -AuthType DBmaestroAccount -Username $(USERNAME) -Password $(PASSWORD)
+      displayName: 'Rollback RS'      

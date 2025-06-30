@@ -1,0 +1,25 @@
+trigger: none
+
+variables:
+  USERNAME: 'poc@dbmaestro.com'
+  PASSWORD: 'VmzU9NIDff1BALGXgsh58XXIg89FH7U5'
+  SERVER: 't21-template'
+  AGENT_PATH: '"C:\\Program Files (x86)\\DBmaestro\\DOP Server\\Agent\\DBmaestroAgent.jar"'
+  PROJECT_NAME: 'MSSQLPOC2'
+
+stages:
+- stage: precheck
+  # condition: always()
+  displayName: 'PreCheck'
+  jobs:
+  - job: dbm_precheck_cmd
+    displayName: 'DBm PreCheck Cmd'
+    pool:
+      name: Local
+      demands:
+      - agent.name -equals localhostagent
+    steps:
+      - script: |
+          java -jar $(AGENT_PATH) -PreCheck -PackageName $(PACKAGE_NAME) -ProjectName $(PROJECT_NAME) -Server $(SERVER) -AuthType DBmaestroAccount -Username $(USERNAME) -Password $(PASSWORD)
+
+      

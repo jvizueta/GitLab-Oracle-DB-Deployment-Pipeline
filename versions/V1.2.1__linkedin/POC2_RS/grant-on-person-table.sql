@@ -1,0 +1,1 @@
+grant select on [dbo].Person to public

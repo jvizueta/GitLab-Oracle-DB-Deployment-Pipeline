@@ -1,0 +1,29 @@
+{
+  "operation": "CreateOrUpdate",
+  "type": "regular",
+  "enabled": true,
+  "closed": false,
+  "scripts": [
+    {
+      "name": "addcol-up.sql",
+      "tags": [],
+      "scriptType": "Upgrade"
+    },
+    {
+      "name": "removecol-down.sql",
+      "tags": [],
+      "scriptType": "Downgrade"
+    }
+  ],
+  "tags":
+    [
+        {
+            "tagNames": ["TTS1307", "TTS1309", "TTS1321"],
+            "tagType": "task"
+        },
+        {
+            "tagNames": ["Build4182"],
+            "tagType": "custom"
+        }
+    ]
+}

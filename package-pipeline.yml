@@ -1,0 +1,30 @@
+trigger: none
+
+variables:
+  USERNAME: 'poc@dbmaestro.com'
+  PASSWORD: 'VmzU9NIDff1BALGXgsh58XXIg89FH7U5'
+  SERVER: 't21-template'
+  AGENT_PATH: '"C:\\Program Files (x86)\\DBmaestro\\DOP Server\\Agent\\DBmaestroAgent.jar"'
+  PROJECT_NAME: 'MSSQLPOC2'
+
+stages:
+- stage: packaging
+  displayName: 'Packaging'
+  jobs:
+  - job: zip_package_folder
+    displayName: 'Zip Package Folder'
+    pool:
+      name: Local
+      demands:
+      - agent.name -equals localhostagent
+    steps:
+      - task: ArchiveFiles@2
+        inputs:
+          rootFolderOrFile: 'versions/$(PACKAGE_NAME)'
+          includeRootFolder: false
+          archiveType: 'zip'
+          archiveFile: '$(PACKAGE_NAME).zip'
+          replaceExistingArchive: true
+          verbose: true
+      - script: |
+          java -jar $(AGENT_PATH) -Package -ProjectName $(PROJECT_NAME) -FilePath $(PACKAGE_NAME).zip -Server $(SERVER) -AuthType DBmaestroAccount -Username $(USERNAME) -Password $(PASSWORD)

@@ -1,0 +1,13 @@
+{
+  "operation": "CreateOrUpdate",
+  "type": "regular",
+  "enabled": true,
+  "closed" : false,
+  "scripts": [
+  {"name" :"persontable.sql"}
+  ],
+  "tags" : [
+  {
+  "tagNames" : ["Jira_1011", "SecurityFixs"], "tagType" : "task"
+  }]
+}

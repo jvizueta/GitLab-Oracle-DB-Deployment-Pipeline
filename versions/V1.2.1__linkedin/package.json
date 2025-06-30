@@ -1,0 +1,26 @@
+{
+  "operation": "CreateOrUpdate",
+  "type": "regular",
+  "enabled": true,
+  "closed" : false,
+  "scripts": [
+    {"name" :"linkedincol.sql"},
+    {"name" :"linkedincol-in-proc.sql"},
+    {"name" :"grant-on-person-table.sql"}
+  ],
+    "tags": [
+    {
+      "tagNames": [
+        "tag1",
+        "tag2"
+      ],
+      "tagType": "custom"
+    },
+    {
+      "tagNames": [
+        "tag3"
+      ],
+      "tagType": "task"
+    }
+  ]
+}

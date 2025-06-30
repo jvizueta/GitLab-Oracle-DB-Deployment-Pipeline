@@ -1,0 +1,9 @@
+{
+  "operation": "CreateOrUpdate",
+  "type": "regular",
+  "enabled": true,
+  "closed" : false,
+  "scripts": [
+  {"name" :"email-col-with-syntax-error.sql"}
+  ]
+}

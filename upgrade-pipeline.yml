@@ -1,0 +1,37 @@
+trigger: none
+
+variables:
+  USERNAME: 'poc@dbmaestro.com'
+  PASSWORD: 'VmzU9NIDff1BALGXgsh58XXIg89FH7U5'
+  SERVER: 't21-template'
+  AGENT_PATH: '"C:\\Program Files (x86)\\DBmaestro\\DOP Server\\Agent\\DBmaestroAgent.jar"'
+  PROJECT_NAME: 'MSSQLPOC2'
+
+stages:
+- stage: upgradeRS
+  # condition: always()
+  displayName: 'Upgrade RS'
+  jobs:
+  - job: dbm_upgrade_rs_cmd
+    displayName: 'DBm Upgrade RS Cmd'
+    pool:
+      name: Local
+      demands:
+      - agent.name -equals localhostagent
+    steps:
+      - script: |
+          java -jar $(AGENT_PATH) -Upgrade -PackageName $(PACKAGE_NAME) -ProjectName $(PROJECT_NAME) -EnvName RS -Server $(SERVER) -AuthType DBmaestroAccount -Username $(USERNAME) -Password $(PASSWORD)
+- stage: upgradeQA
+  # condition: always()
+  displayName: 'Upgrade QA'
+  jobs:
+  - job: dbm_upgrade_qa_cmd
+    displayName: 'DBm Upgrade QA Cmd'
+    pool:
+      name: Local
+      demands:
+      - agent.name -equals localhostagent
+    steps:
+      - script: |
+          java -jar $(AGENT_PATH) -Upgrade -PackageName $(PACKAGE_NAME) -ProjectName $(PROJECT_NAME) -EnvName QA -Server $(SERVER) -AuthType DBmaestroAccount -Username $(USERNAME) -Password $(PASSWORD)          
+      

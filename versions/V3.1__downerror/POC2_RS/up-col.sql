@@ -1,0 +1,1 @@
+ALTER  TABLE [dbo].[Person] ADD [ModifiedDate] datetime NULL;
